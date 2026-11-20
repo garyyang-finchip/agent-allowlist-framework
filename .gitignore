@@ -1,0 +1,11 @@
+out/
+cache/
+broadcast/
+lib/
+node_modules/
+*.env
+.env
+__pycache__/
+
+deployments/*/state.json
+deployments/anvil/evidence.json
