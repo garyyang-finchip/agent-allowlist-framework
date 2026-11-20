@@ -1,5 +1,9 @@
 # Ethereum Magicians first post
 
+Posted on 2026-11-20 as topic 30456:
+
+https://ethereum-magicians.org/t/draft-erc-agent-whitelist-framework-awf-scoped-allow-and-deny-lists-for-agents-adopted-per-consumer-with-stated-grounds-and-uniform-results/30456
+
 Category: ERCs
 
 Title:

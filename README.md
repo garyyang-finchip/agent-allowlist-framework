@@ -11,7 +11,7 @@ AWF fixes how admission and refusal are expressed, checked and given effect. It 
 | Status | Draft, version 0.1.0 |
 | Specification | [ERCS/erc-9999.md](ERCS/erc-9999.md) (placeholder number until one is assigned) |
 | Pull request | Not opened yet |
-| Discussion | Not opened yet; text in [docs/magicians-post.md](docs/magicians-post.md) |
+| Discussion | [Ethereum Magicians, topic 30456](https://ethereum-magicians.org/t/draft-erc-agent-whitelist-framework-awf-scoped-allow-and-deny-lists-for-agents-adopted-per-consumer-with-stated-grounds-and-uniform-results/30456) |
 | Requires | ERC-165 |
 | Author | Gary Yang ([@garyyang-finchip](https://github.com/garyyang-finchip)) |
 | License | CC0-1.0 |
