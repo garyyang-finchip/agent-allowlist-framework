@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-20)
+
+- The specification is filed as pull request 2192 against the ERCs repository. The README and the post draft carry its link.
+
 ## 0.1.1 (2026-11-20)
 
 - The discussion topic is open on Ethereum Magicians (topic 30456). `discussions-to` of the specification, the filing package, the README and the post draft carry its link.

@@ -76,7 +76,11 @@ https://github.com/garyyang-finchip/agent-whitelist-framework
 - 134 Foundry tests, including three worked cases end to end: bidding for a task under criteria; a group's deny list with notice, objection and extension; a service that combines an allow list, a deny list and a committed deny set.
 - JSON Schemas of the documents, example documents, and vectors produced by a second implementation outside Solidity and replayed against the contracts.
 
-Sepolia deployment and pull request: to be added to this post.
+Pull request:
+
+https://github.com/ethereum/ERCs/pull/2192
+
+Sepolia deployment: to be added to this post.
 
 ## Open questions
 
