@@ -6,6 +6,7 @@ node_modules/
 *.env
 .env
 __pycache__/
+ercs-pr-package/
 
 deployments/*/state.json
 deployments/anvil/evidence.json
