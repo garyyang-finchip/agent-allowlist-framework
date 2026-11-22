@@ -1,10 +1,16 @@
 # Decision log
 
-The decisions behind version 0.1.0, in the order they were taken. Each entry gives the decision and what it means in the specification and the code.
+The decisions behind the specification, in the order they were taken. Each entry gives the decision and what it means in the specification and the code. The decisions of revision 0.2.0 are at the end.
 
 ## Name
 
-The proposal is the **Agent Whitelist Framework (AWF)**. It defines whitelists and blacklists together from the abstract onward. The text uses `ALLOW` and `DENY` for the two polarities.
+The proposal was drafted and first discussed as the Agent Whitelist Framework (AWF). When its number, ERC-8507, was assigned, an editor suggested the title **Agent Allowlist Framework**, and the title was changed.
+
+The rest of the naming was then brought in line with the title, in one step and before anything was deployed or merged: the short name is **AAF**; the interfaces and contracts carry the prefix `IAAF` and `AAF`; the identifier tags are `AAF.Scope.v1` and so on; subject kinds, actions, relations and dimensions are named `aaf.*`; the schema files are `aaf-*.schema.json`; the repository is `agent-allowlist-framework`. Tags and names are hashed into identifiers, so every identifier and vector of revision 0.1 changed with them. Function selectors and interface identifiers do not depend on these names.
+
+One name was left: the branch of the fork that the pull request was opened from, `add-erc-agent-whitelist`. Renaming the head branch of an open pull request closes the pull request, and the number was assigned in it.
+
+The proposal defines allowlists and denylists together from the abstract onward, names the older words whitelist and blacklist once in its terms, and uses `ALLOW` and `DENY` for the two polarities.
 
 ## D1. What is being defined
 
@@ -12,7 +18,7 @@ A scoped relation of admission and refusal: who adopts, in what scope, for which
 
 ## D2. One object with a polarity
 
-Whitelists and blacklists share structure, interface and lifecycle. Polarity is fixed at creation and is part of the list identifier, so that no entry or proof can come to mean its opposite. Not matching one polarity never creates membership in the other.
+Allowlists and denylists share structure, interface and lifecycle. Polarity is fixed at creation and is part of the list identifier, so that no entry or proof can come to mean its opposite. Not matching one polarity never creates membership in the other.
 
 ## D3. Membership modes
 
@@ -72,6 +78,18 @@ Three cases, each a test and a part of the evidence run:
 - **Work in progress.** An action is decided at every use or once per context. A list change stops new work at once; admitted work continues under the rule the adopter declared until the adopter withdraws the admission. Nothing in the framework touches what was earned or is owed.
 - **References between lists.** A source has to exist when a derived list is created, which rules out cycles; chains are bounded; a source that cannot answer makes the derived result undetermined; a derived list can hold to one state of its source.
 - **Closed lists.** A closed list answers undetermined, not "nobody is listed".
+
+## Revision 0.2.0
+
+Taken after the first reviews on the discussion topic.
+
+- **R1. Reuse is declared per action.** `ActionRule.once` is replaced by `ActionRule.reuse` with three values. `NONE`, the zero value: every use is decided on its own and the assessment has a validity of zero. `WHILE_CURRENT`: the consumer may rely on an earlier assessment while the binding, the list states and the validity allow. `ADMISSION`: what `once` was. Before this revision any assessment could be kept until its validity passed, for any action, without the binding saying so; that was an undeclared default in favour of a request. The framework decides who may take part in an action. It does not decide the terms of an operation, which stay with the consumer that carries it out. A register of single-use operation commitments inside the guard was considered and not added: with no reuse there is nothing stored to use twice, and protection against repeating an operation is the consumer's own.
+- **R2. Validity covers only what can be foreseen.** An evaluator returns a validity of zero whenever its result rests on something that can change at a time it cannot read in advance. The example evaluator reported the expiry of a credential although the credential can be revoked earlier; it now returns zero. Results of the related-object extension already did. A second interface through which reuse would read every dependency again was considered and not added, since it repeats the evaluation. Holding to a decision while its inputs may change is what an admission is for, and it is declared.
+- **R3. Entries tied to code.** An entry about an account on the chain of the registry can be tied to a code hash. Other code yields an undetermined result with reason `CODE_CHANGED`, and every result of such an entry has a validity of zero. The hash of an account that delegates its code is the hash of the delegation, so the tie follows the delegation target. The tie does not see an implementation behind a proxy or installed modules; those are read by an evaluator. Entries about other kinds of subject cannot be tied to code and are refused.
+- **R4. Proceeding within a limit.** `PROCEED_RESTRICTED` stays, under conditions: the limit is stated in the binding document, a guard refuses the declaration without a binding document, and a consumer that cannot apply the limit where the action is carried out declares deferral or refusal. A guard cannot verify that a consumer applies its limit, and the text says so. The example consumer applies one.
+- **R5. Reuse and the controller.** Relying on an earlier assessment requires that the controller found at the use is the controller named in the assessment.
+
+Not changed: the guard interface for `assess` and `enforce`, the four objects of a list, the outcome rules, the state hash and the state digest.
 
 ## Open for the next revision
 

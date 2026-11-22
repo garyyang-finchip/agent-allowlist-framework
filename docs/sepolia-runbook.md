@@ -2,11 +2,11 @@
 
 The run deploys the reference implementation and executes the three worked cases of the specification on Sepolia. It ends by reading the final state back, checking it against the specification, and writing `deployments/sepolia/evidence.json`.
 
-The same run was rehearsed on a local node: 83 transactions, every step with the result the specification gives.
+The same run was rehearsed on a local node: 87 transactions, every step with the result the specification gives.
 
 ## What the run does
 
-Eighty-three transactions in seven phases and one wait:
+Eighty-seven transactions in seven phases and one wait:
 
 | Phase | What happens | Sent by |
 | --- | --- | --- |
@@ -15,7 +15,7 @@ Eighty-three transactions in seven phases and one wait:
 | `caseB1` | Case B: deny list with a notice period of 120 seconds, the list derived from it, binding; an agent identity bound to its operator's account; the identity joins, is entered with an evidenced basis, joins again during the notice period, objects | deployer, manager, operator |
 | `caseA2` | Case A: a credential that lasts 240 seconds is issued and used: the bid is admitted | issuer, bob |
 | wait | 300 seconds, so that the notice period and the credential lifetime pass | |
-| `caseA3` | Case A: the same bid after the expiry is refused; no list changed | bob |
+| `caseA3` | Case A: the same bid after the expiry is refused; a credential that lasts thirty days is issued and a bid under it admitted; the issuer revokes it, no list and no state digest changes, and the next bid is refused | bob, issuer |
 | `caseB2` | Case B: the identity is refused; the operator's account is admitted; the binding is amended to name the derived list and the account is refused; a named successor is admitted; an account that takes the identity over and binds to it is refused; the entry is revoked and that account is admitted | operator, deployer, carol, bob, manager |
 | `caseC` | Case C: allow list, deny list, committed deny set, list of excluded tools, two bindings; a call admitted; calls deferred or refused for an undetermined side, a conflict, no match and a borrowed identity; a tool version refused and one run; removal from the allow list; a new commitment | deployer, manager, alice, bob, carol, mallory |
 | `report` | Reads the state, checks it, writes `evidence.json` | read only |
@@ -43,23 +43,23 @@ A run that is started again deploys fresh contracts at other addresses.
 
 ## Cost
 
-Sepolia prices state creation at 1,530 gas per byte (EIP-8037). The local rehearsal used 20,954,368 gas under the earlier rules. Under Sepolia's pricing the run is estimated at about 125,000,000 gas: about 80,000,000 for the eleven deployments, of which registry and guard are about 21,500,000 each, and the rest for the transactions of the cases. This is an estimate from the sizes of the contracts and the number of storage slots written; the driver takes every gas limit from the node.
+Sepolia prices state creation at 1,530 gas per byte (EIP-8037). The local rehearsal used 21,658,108 gas under the earlier rules. Under Sepolia's pricing the run is estimated at about 129,000,000 gas: about 83,000,000 for the eleven deployments, of which registry and guard are about 22,000,000 each, and the rest for the transactions of the cases. This is an estimate from the sizes of the contracts and the number of storage slots written; the driver takes every gas limit from the node.
 
-The driver sends every transaction with a fixed tip (0.2 gwei unless `TIP_WEI` says otherwise) and a fee cap of twice the base fee plus the tip. Before sending anything it checks that the deployer holds 166,500,000 gas at that cap: 125,000,000 for its own transactions and 41,500,000 that it passes on to the seven accounts. With a base fee near zero that is about 0.034 ETH. **0.05 Sepolia ETH on the deployer is enough while the base fee is below 0.05 gwei.** If it is higher the driver prints the budget and sends nothing.
+The driver sends every transaction with a fixed tip (0.2 gwei unless `TIP_WEI` says otherwise) and a fee cap of twice the base fee plus the tip. Before sending anything it checks that the deployer holds 168,500,000 gas at that cap: 125,000,000 for its own transactions and 43,500,000 that it passes on to the seven accounts. With a base fee near zero that is about 0.034 ETH. **0.05 Sepolia ETH on the deployer is enough while the base fee is below 0.045 gwei.** If it is higher the driver prints the budget and sends nothing.
 
 ## Validity of the plan
 
-`deployments/sepolia/plan.json` fixes the accounts, the document hashes and the committed set of the run. It does not expire. A new plan is needed only for another deployer key (`node tools/awf.mjs plan sepolia` with `DEPLOYER_PK` set, then commit the regenerated `deployments/sepolia`).
+`deployments/sepolia/plan.json` fixes the accounts, the document hashes and the committed set of the run. It does not expire. A new plan is needed only for another deployer key (`node tools/aaf.mjs plan sepolia` with `DEPLOYER_PK` set, then commit the regenerated `deployments/sepolia`).
 
-The documents of the run are served from this repository under `deployments/sepolia/documents/`, in the canonical form whose hash is anchored. They have to be on the `main` branch before the run, because their locations are recorded on chain. The plan assumes the repository is `github.com/garyyang-finchip/agent-whitelist-framework`. Under another name, change the one line `recordBase` in `deployments/sepolia/plan.json` before the run; no hash depends on it.
+The documents of the run are served from this repository under `deployments/sepolia/documents/`, in the canonical form whose hash is anchored. They have to be on the `main` branch before the run, because their locations are recorded on chain. The plan assumes the repository is `github.com/garyyang-finchip/agent-allowlist-framework`. Under another name, change the one line `recordBase` in `deployments/sepolia/plan.json` before the run; no hash depends on it.
 
 ## Steps
 
 Requires Foundry (forge and cast, 1.7.1 or later) and git. Node is not needed for the run. The driver builds the contracts and the script without the test files, which takes about 460 MB of memory and half a minute.
 
 ```sh
-git clone https://github.com/garyyang-finchip/agent-whitelist-framework.git
-cd agent-whitelist-framework
+git clone https://github.com/garyyang-finchip/agent-allowlist-framework.git
+cd agent-allowlist-framework
 forge --version
 bash scripts/setup.sh
 ```
@@ -67,14 +67,14 @@ bash scripts/setup.sh
 Create the environment file outside the repository. It holds two lines, the deployer key and the RPC endpoint:
 
 ```sh
-printf 'export DEPLOYER_PK=%s\nexport SEPOLIA_RPC_URL=%s\n' '<deployer key>' '<Sepolia JSON-RPC endpoint>' > ~/awf.env
-chmod 600 ~/awf.env
+printf 'export DEPLOYER_PK=%s\nexport SEPOLIA_RPC_URL=%s\n' '<deployer key>' '<Sepolia JSON-RPC endpoint>' > ~/aaf.env
+chmod 600 ~/aaf.env
 ```
 
 Run:
 
 ```sh
-source ~/awf.env
+source ~/aaf.env
 bash scripts/evidence-run.sh sepolia
 ```
 
