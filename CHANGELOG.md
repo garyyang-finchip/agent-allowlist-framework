@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.2.0 (2026-11-23)
+
+Number and names.
+
+- The proposal is ERC-8507. Specification at `ERCS/erc-8507.md`, assets under `assets/erc-8507/`; the placeholder files are removed.
+- The title is Agent Allowlist Framework, as an editor suggested, and the rest of the naming follows it. The short name is AAF. Interfaces and contracts are `IAAFRegistry`, `IAAFGuard`, `IAAFEvaluator`, `IAAFRelationSource`, `IAAFSubjectResolver`, `AAFRegistry`, `AAFGuard`, `AAFTypes.sol`, `AAFCredentialHistoryEvaluator`, `AAFBoundAnchorRelation`, `AAFExampleConsumer`. Identifier tags are `AAF.Scope.v1` and so on; subject kinds, actions, relations and dimensions are `aaf.*`; documents carry `"aaf": "1"`; schema files are `aaf-*.schema.json`; the tool is `tools/aaf.mjs`. The names of revision 0.1 had AWF and `awf` in these places.
+- Every identifier that hashes a tag or a name changed, and so did every vector and every example document. Function selectors and interface identifiers do not depend on these names.
+- The repository is renamed from `agent-whitelist-framework` to `agent-allowlist-framework`. The plan of the Sepolia run records the documents under the new name.
+- The text uses allowlist and denylist and names the older words once.
+- `ercs-pr-package/` is no longer kept in the repository. `scripts/make-filing-package.py` writes it on demand.
+
+Changes after review on the discussion topic. They change the interface identifiers of `IAAFRegistry` and `IAAFGuard`.
+
+- Reuse is declared per action: `ActionRule.once` is replaced by `ActionRule.reuse` with `NONE` (the zero value), `WHILE_CURRENT` and `ADMISSION`. An assessment carries a validity only for an action declared `WHILE_CURRENT`.
+- A result that rests on something that can change without the state of its list changing holds for its call only. `AAFCredentialHistoryEvaluator` returns a validity of zero instead of the expiry of the credential. Criteria documents state how long a result holds (`evaluation.resultValidity`).
+- An entry about an account can be tied to the code of the account (`EntryInput.codeHash`, `Entry.codeHash`, reason `CODE_CHANGED`, error `CodePinNotSupported`). `EntryAdded` carries the code hash.
+- `PROCEED_RESTRICTED` is declared only with a binding document that states the limit (`rules.restriction`); a guard refuses the declaration without one. The example consumer applies a limit.
+- Relying on an earlier assessment requires the same controller.
+- Specification: Sections 6.4, 6.6, 6.8, 6.9, 6.10, 8.2, 8.4, 8.7, 8.8 and 8.9 revised; fourteen invariants; test cases for reuse, entries tied to code and proceeding within a limit; Case A has twelve steps, with a revocation before expiry.
+- 145 Foundry tests. The evidence run has 87 transactions on a local node and includes the revocation.
+- Reply to the reviews in `docs/magicians-replies.md`.
+
 ## 0.1.2 (2026-11-20)
 
 - The specification is filed as pull request 2192 against the ERCs repository. The README and the post draft carry its link.
