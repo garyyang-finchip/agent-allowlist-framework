@@ -1,5 +1,7 @@
 # Sepolia evidence run: how it is made
 
+The run was made on 2026-11-22; its record is [sepolia-evidence.md](sepolia-evidence.md) and `deployments/sepolia/evidence.json`. This document describes how it is made, so that it can be repeated.
+
 The run deploys the reference implementation and executes the three worked cases of the specification on Sepolia. It ends by reading the final state back, checking it against the specification, and writing `deployments/sepolia/evidence.json`.
 
 The same run was rehearsed on a local node: 87 transactions, every step with the result the specification gives.
@@ -43,9 +45,9 @@ A run that is started again deploys fresh contracts at other addresses.
 
 ## Cost
 
-Sepolia prices state creation at 1,530 gas per byte (EIP-8037). The local rehearsal used 21,658,108 gas under the earlier rules. Under Sepolia's pricing the run is estimated at about 129,000,000 gas: about 83,000,000 for the eleven deployments, of which registry and guard are about 22,000,000 each, and the rest for the transactions of the cases. This is an estimate from the sizes of the contracts and the number of storage slots written; the driver takes every gas limit from the node.
+Sepolia prices state creation at 1,530 gas per byte (EIP-8037). The local rehearsal used 21,658,108 gas under the earlier rules. On Sepolia the run of 2026-11-22 used about 107,400,000 gas: about 92,100,000 by the deployer, whose transactions are the eleven deployments, the scopes, the criteria and the adoptions, and about 15,300,000 by the seven accounts of the cases. The driver takes every gas limit from the node.
 
-The driver sends every transaction with a fixed tip (0.2 gwei unless `TIP_WEI` says otherwise) and a fee cap of twice the base fee plus the tip. Before sending anything it checks that the deployer holds 168,500,000 gas at that cap: 125,000,000 for its own transactions and 43,500,000 that it passes on to the seven accounts. With a base fee near zero that is about 0.034 ETH. **0.05 Sepolia ETH on the deployer is enough while the base fee is below 0.045 gwei.** If it is higher the driver prints the budget and sends nothing.
+The driver sends every transaction with a fixed tip (0.2 gwei unless `TIP_WEI` says otherwise) and a fee cap of twice the base fee plus the tip. Before sending anything it checks that the deployer holds 168,500,000 gas at that cap: 125,000,000 for its own transactions and 43,500,000 that it passes on to the seven accounts. With a base fee near zero that is about 0.034 ETH. **0.05 Sepolia ETH on the deployer is enough while the base fee is below 0.045 gwei.** If it is higher the driver prints the budget and sends nothing. The run of 2026-11-22, at a base fee of 16 wei, burnt about 0.0215 ETH and left about 0.0056 ETH in the seven accounts.
 
 ## Validity of the plan
 

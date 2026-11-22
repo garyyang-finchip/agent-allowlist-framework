@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2026-11-23)
+
+Sepolia evidence.
+
+- Revision 0.2.0 deployed on Sepolia on 2026-11-22 and the three worked cases executed end to end: 87 transactions in blocks 12190415 to 12190525, every step with the result the specification gives, final state read back and checked. `AAFRegistry` at 0xBCD17Ac576A675a29F78176209289B72c1b122C7, `AAFGuard` at 0x1e977Eae5dc102bDc72c6E6aE14654257ec787b7.
+- `deployments/sepolia/evidence.json` as written by the run; `docs/sepolia-evidence.md` with addresses, accounts, phases, results, cost and how to read the state back; README deployments table; the discussion post carries the deployment.
+- Measured cost under Sepolia's state-creation pricing: about 107,400,000 gas for the run, of which about 92,100,000 for the deployer's eleven deployments and adoptions; the runbook's estimate is replaced by the measured figures.
+
 ## 0.2.0 (2026-11-23)
 
 Number and names.

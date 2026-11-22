@@ -1,0 +1,57 @@
+{
+  "caseA": {
+    "bidsRecorded": 3,
+    "bidsRefused": 6,
+    "binding": "0x5bac5bf170dcf8e2a2ec0464bd4b252fb8fc670b832861abb42252d722121c4d",
+    "criteria": "0x8fe9b1609df355bb3181d57d8b942460013b729a5cc082e1446176356b7ce894",
+    "identityA": 1,
+    "identityB": 2,
+    "list": "0xc823fea668d685f868bea2cf0f3e81328d7bbfae66be8ecee033140c73f2a5b0",
+    "stateDigest": "0xa452dfcbbccb1982b9bd8f5a7bdef562cdc162b52ca5ffbf555815f03984825f"
+  },
+  "caseB": {
+    "binding": "0x5290a7583f402fa7c1b725d1e928c45a2f1f6babe10d4a2ec2aea4f19cb9f1e0",
+    "bindingVersion": 2,
+    "derivedList": "0x93e3ec8b4c08b0dcc39d99da49d8457d23e5c6d7420346dfdc10ede817b143c7",
+    "entryBasisHash": "0x6b530d0ecce818be25523fa8b5943778bd692d0454ee03a43f7b843ae3a08fe1",
+    "entryListedAt": 1795371960,
+    "entryValidFrom": 1795372080,
+    "identity": 3,
+    "joinsAdmitted": 5,
+    "joinsRefused": 3,
+    "list": "0xb50a3635d68cbe67ed052444db3a57b5f90e191f721180d70d12b02696eccd25"
+  },
+  "caseC": {
+    "allowList": "0x150545ecefbec0c4b458db49df644265ec55fef1b6999f02cffdedece77fd13e",
+    "binding": "0x4b3ba53c41e22450caa15483d4a7c921a07d5a3ef5150395f65b77cae4acfe58",
+    "callsNotServed": 5,
+    "callsServed": 1,
+    "committedDenyList": "0x13e1444c2cfca0930831de8ae1466ce4baa608c018fe8dbfb0afb71c4a126384",
+    "committedRoot": "0xe2e51f4258e00d2f0efe68367de2dd996fc2b87e89f778937735ac12780869db",
+    "currentStateDigest": "0x91e32cf4c7f361b536abb9d390459080a2d61bbda3057ba9dddd71b1e0d28a11",
+    "denyList": "0x9a210093f170943226918fad22b9b8d8ccadbd3d01bed7be5cd5d7cd2f455362",
+    "earlierAssessmentCurrent": false,
+    "earlierStateDigest": "0x532651edc9ea13a0286ee0b7eaf93ecbfaa6d07e81828ae89e7816d4a9c2cb03",
+    "toolBinding": "0x6b63e895461728e848dc8ba4347924c2803c7089e7fc1123f71aa91fefc302c8",
+    "toolList": "0x65de715b47f36d8f922a573f8db4e94930fa3b667cfbaa7154c5d383f93df3f8",
+    "toolUsesCarriedOut": 1,
+    "toolUsesRefused": 1
+  },
+  "chainId": 11155111,
+  "contracts": {
+    "anchorRegistry": "0x7D9dC571C3B9Ab12B58b7Fc1556a3142E5073Ae7",
+    "assertionFixture": "0x78e3B2D86c8560440Db5E25384373B875a6247Be",
+    "boundAnchorRelation": "0x65B8755d22bDcDC6A96EaE5FE46B433E208949D9",
+    "credentialHistoryEvaluator": "0x33712D575b991Ded45131807d8d6b05839217877",
+    "guard": "0x1e977Eae5dc102bDc72c6E6aE14654257ec787b7",
+    "identityFixture": "0xc3aEe339676bbFe4320198E532dCBDE14F120c8C",
+    "inferenceGateway": "0xD7161E5111320BE656333BE62fF7B008D20cdF51",
+    "registry": "0xBCD17Ac576A675a29F78176209289B72c1b122C7",
+    "swarmMembership": "0xC44740Dbf5E0D26197Fc618a523DA12D08B81351",
+    "taskBoard": "0xD0ded5d9E11dE80eb5607447f090fB87d6B03713",
+    "taskLedgerFixture": "0xCFA832d161Ba58695673AF7A17C24ddafbFDB74f"
+  },
+  "deployer": "0xcdd5b0439B3bcEEb8DF51cCC5567d0e4D3dab060",
+  "network": "sepolia",
+  "readAtBlock": 12190525
+}

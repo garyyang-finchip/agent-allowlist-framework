@@ -14,7 +14,7 @@ ERC-8507: Agent Allowlist Framework (AAF)
 
 The topic was opened as "Draft ERC: Agent Whitelist Framework (AWF)". The number was assigned on 2026-11-21, and the title follows the title and the short name of the specification.
 
-Body, everything below the line. It is the text of the first post as of revision 0.2.0.
+Body, everything below the line. It is the text of the first post as of revision 0.2.1, with the Sepolia deployment added to the Reference implementation section on 2026-11-23.
 
 ---
 
@@ -81,7 +81,12 @@ Pull request:
 
 https://github.com/ethereum/ERCs/pull/2192
 
-Sepolia deployment: to be added to this post.
+Sepolia deployment, 2026-11-22, revision 0.2.0, with the three worked cases executed end to end (87 transactions, blocks 12190415 to 12190525; every step with the result the specification gives, final state read back and checked):
+
+- `AAFRegistry`: https://eth-sepolia.blockscout.com/address/0xBCD17Ac576A675a29F78176209289B72c1b122C7
+- `AAFGuard`: https://eth-sepolia.blockscout.com/address/0x1e977Eae5dc102bDc72c6E6aE14654257ec787b7
+- Example evaluator and relation source: 0x33712D575b991Ded45131807d8d6b05839217877, 0x65B8755d22bDcDC6A96EaE5FE46B433E208949D9
+- Record, addresses, phases and cost: https://github.com/garyyang-finchip/agent-allowlist-framework/blob/main/docs/sepolia-evidence.md
 
 ## Open questions
 

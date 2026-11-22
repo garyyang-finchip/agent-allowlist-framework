@@ -10,10 +10,11 @@ The proposal was first discussed as Agent Whitelist Framework (AWF). Revision 0.
 
 | | |
 | --- | --- |
-| Status | Draft, version 0.2.0 |
+| Status | Draft, version 0.2.1 |
 | Specification | [ERCS/erc-8507.md](ERCS/erc-8507.md), ERC-8507 |
 | Pull request | [ethereum/ERCs#2192](https://github.com/ethereum/ERCs/pull/2192) |
 | Discussion | [Ethereum Magicians, topic 30456](https://ethereum-magicians.org/t/erc-8507-agent-allowlist-framework-aaf/30456) |
+| Sepolia | `AAFRegistry` 0xBCD17Ac576A675a29F78176209289B72c1b122C7, `AAFGuard` 0x1e977Eae5dc102bDc72c6E6aE14654257ec787b7; see [docs/sepolia-evidence.md](docs/sepolia-evidence.md) |
 | Requires | ERC-165 |
 | Author | Gary Yang ([@garyyang-finchip](https://github.com/garyyang-finchip)) |
 | License | CC0-1.0 |
@@ -118,13 +119,26 @@ Assessments are views; `assess` costs nothing when called off chain. The figures
 
 ## Deployments
 
-None yet. The plan of the Sepolia run, with its accounts and documents, is in [deployments/sepolia](deployments/sepolia); how the run is made is in [docs/sepolia-runbook.md](docs/sepolia-runbook.md).
+Sepolia, 2026-11-22, revision 0.2.0, blocks 12190415 to 12190525. The three worked cases were executed end to end in 87 transactions, every step with the result the specification gives, and the final state was read back and checked. Record: [deployments/sepolia/evidence.json](deployments/sepolia/evidence.json); account: [docs/sepolia-evidence.md](docs/sepolia-evidence.md); how the run is made: [docs/sepolia-runbook.md](docs/sepolia-runbook.md).
+
+| Contract | Sepolia address |
+| --- | --- |
+| `AAFRegistry` | `0xBCD17Ac576A675a29F78176209289B72c1b122C7` |
+| `AAFGuard` | `0x1e977Eae5dc102bDc72c6E6aE14654257ec787b7` |
+| `AAFCredentialHistoryEvaluator` | `0x33712D575b991Ded45131807d8d6b05839217877` |
+| `AAFBoundAnchorRelation` | `0x65B8755d22bDcDC6A96EaE5FE46B433E208949D9` |
+| Example consumers: task board, swarm membership, inference gateway | `0xD0ded5d9E11dE80eb5607447f090fB87d6B03713`, `0xC44740Dbf5E0D26197Fc618a523DA12D08B81351`, `0xD7161E5111320BE656333BE62fF7B008D20cdF51` |
+| Stand-ins: identity registry, assertion registry, task ledger | `0xc3aEe339676bbFe4320198E532dCBDE14F120c8C`, `0x78e3B2D86c8560440Db5E25384373B875a6247Be`, `0xCFA832d161Ba58695673AF7A17C24ddafbFDB74f` |
+| Address-anchored identity registry (vendored reference) | `0x7D9dC571C3B9Ab12B58b7Fc1556a3142E5073Ae7` |
+
+Registry and guard have no owner and no upgrade path, so the deployment is final as it stands. The lists, bindings and entries of the run are left in the state the cases ended in.
 
 ## Documents
 
 - [docs/decision-log.md](docs/decision-log.md): the design decisions behind the specification, including those of revision 0.2.0
 - [docs/filing-runbook.md](docs/filing-runbook.md): how the specification is filed with the ERCs repository
 - [docs/sepolia-runbook.md](docs/sepolia-runbook.md): how the on-chain evidence run is made
+- [docs/sepolia-evidence.md](docs/sepolia-evidence.md): the Sepolia run of 2026-11-22, with addresses, blocks, results and cost
 - [docs/magicians-post.md](docs/magicians-post.md): text of the discussion topic
 - [docs/magicians-replies.md](docs/magicians-replies.md): replies to the reviews on the discussion topic
 - [CHANGELOG.md](CHANGELOG.md)
